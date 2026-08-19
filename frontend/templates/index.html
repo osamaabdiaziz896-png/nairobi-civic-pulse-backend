@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Nairobi Civic Pulse — County Development Tracker</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/3.4.1/tailwind.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/css/dashboard.css">
+</head>
+<body class="ledger-bg text-ink">
+
+  <header class="border-b-2 border-ink/80">
+    <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+      <div class="flex items-center gap-4">
+        <div class="seal">NCP</div>
+        <div>
+          <p class="eyebrow">Nairobi City County &middot; Development Ledger</p>
+          <h1 class="font-display text-2xl md:text-3xl leading-tight">Nairobi Civic Pulse</h1>
+        </div>
+      </div>
+      <div class="hidden md:block text-right">
+        <p class="eyebrow">CIDP 2023&ndash;2027</p>
+        <p class="text-sm text-ink/60">Live accountability register</p>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-6 py-8">
+
+    <!-- KPI Cards -->
+    <section class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8" id="kpi-cards">
+      <div class="ledger-card">
+        <p class="eyebrow">Total Flagship Projects</p>
+        <p class="kpi-number" id="kpi-total">—</p>
+      </div>
+      <div class="ledger-card">
+        <p class="eyebrow">Total Budget Allocation</p>
+        <p class="kpi-number" id="kpi-budget">—</p>
+      </div>
+      <div class="ledger-card">
+        <p class="eyebrow">Completed</p>
+        <p class="kpi-number" id="kpi-completed">—</p>
+      </div>
+      <div class="ledger-card">
+        <p class="eyebrow">Ongoing</p>
+        <p class="kpi-number" id="kpi-ongoing">—</p>
+      </div>
+    </section>
+
+    <!-- Search + Filters -->
+    <section class="ledger-card mb-8">
+      <div class="flex flex-col md:flex-row gap-4 items-stretch md:items-end">
+        <div class="flex-1">
+          <label class="field-label">Search projects or wards</label>
+          <input id="search-input" type="text" placeholder="e.g. Dandora, market, sewer&hellip;"
+                 class="field-input" />
+        </div>
+        <div>
+          <label class="field-label">Sector</label>
+          <select id="sector-filter" class="field-input"><option value="">All sectors</option></select>
+        </div>
+        <div>
+          <label class="field-label">Status</label>
+          <select id="status-filter" class="field-input"><option value="">All statuses</option></select>
+        </div>
+        <button id="clear-filters" class="stamp-btn">Clear</button>
+      </div>
+    </section>
+
+    <!-- Charts -->
+    <section class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+      <div class="ledger-card">
+        <p class="eyebrow mb-3">Projects by Sector</p>
+        <canvas id="sectorChart" height="220"></canvas>
+      </div>
+      <div class="ledger-card">
+        <p class="eyebrow mb-3">Budget Allocation by Sector (KES)</p>
+        <canvas id="budgetChart" height="220"></canvas>
+      </div>
+    </section>
+
+    <!-- Data Table -->
+    <section class="ledger-card">
+      <div class="flex items-center justify-between mb-3">
+        <p class="eyebrow">Project Register</p>
+        <p class="text-sm text-ink/50" id="result-count"></p>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm ledger-table">
+          <thead>
+            <tr>
+              <th>ID</th><th>Project</th><th>Sector</th><th>Ward</th>
+              <th>Budget (KES)</th><th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="projects-tbody"></tbody>
+        </table>
+      </div>
+      <div class="flex items-center justify-between mt-4">
+        <button id="prev-page" class="stamp-btn">&larr; Prev</button>
+        <span id="page-indicator" class="text-sm text-ink/60"></span>
+        <button id="next-page" class="stamp-btn">Next &rarr;</button>
+      </div>
+    </section>
+
+    <footer class="text-center text-xs text-ink/40 py-10">
+      Prototype built for "Nairobi Civic Pulse: A Digital Accountability Tracker for County Development" &middot;
+      Data sourced from the Nairobi City County CIDP 2023&ndash;2027 (sample/demo dataset).
+    </footer>
+  </main>
+
+<script src="/static/js/app.js"></script>
+</body>
+</html>
